@@ -17,10 +17,10 @@ jobs:
         run: sudo service mysql start
       - name: Create test database
         run: |
-          sudo systemctl start mysql
           mysql -uroot -proot < databases/create_databases.sql
           ./gradlew testMigrate
       - name: Build with Gradle
+        chmod +x gradlew
         run: ./gradlew clean build
       - name: Publish allocations artifact
         uses: actions/upload-artifact@v1
